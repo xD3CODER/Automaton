@@ -28,8 +28,11 @@ class Automate
         void print();
         void analyseMot(std::string mot);
         void reset();
+		void setFound(bool state) { _found = state; };
+		bool getFound() { return _found; };
         Automate& operator=(const Automate &arg);
     protected:
+		bool _found = false;
 		std::vector<std::string> _initialStates , _finalStates;
 		std::string _fileName;
 		Utils _util;

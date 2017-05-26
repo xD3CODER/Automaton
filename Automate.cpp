@@ -84,13 +84,18 @@ void Automate::loading(string fileName)
 	this->_fileName = fileName;
 	_util.consoleClear();
 	ifstream origine;
-	origine.open("Automates/#09.txt", ios::in); //Ouverture du fichier en lecture
+	origine.open("Automates/"+ fileName +".txt", ios::in); //Ouverture du fichier en lecture
 
 	if (!origine)
 	{
 		cerr << Colors::fg_red << "Automate introuvable !" << Colors::fg_white << endl;
 		return;
 	}
+	else
+	{
+		this->setFound(true);
+	}
+
 	int tmpInt, nbrLecture, source, dest;
 	char tmpChar;
 	
@@ -118,7 +123,7 @@ void Automate::loading(string fileName)
 
 	for (int i = 0; i<tmpInt; i++)//initialisation des états
 	{
-		_listEtats.push_back(new Etat(_util.ToString(i + 1)));
+		_listEtats.push_back(new Etat(_util.ToString(i)));
 	}
 	
 	origine >> nbrLecture;//nombre d'états initiaux
@@ -126,6 +131,7 @@ void Automate::loading(string fileName)
 	//cout << "   Nombre d'etats initiaux : " + _util.ToString(nbrLecture) << endl;
 	for (int i = 0; i<nbrLecture; i++)//mettre les états initiaux
 	{
+	
 		origine >> tmpInt;
        _listEtats[rechercheIndiceEtat(_util.ToString(tmpInt))]->setEntree(true); // On initialise l'état lue comme étant un état initial grace a son index
 	}

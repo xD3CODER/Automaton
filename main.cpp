@@ -31,12 +31,13 @@ int main()
 
     Automate yolo;
     string name;
-    cout << Colors::fg_cyan << "Saisir le nom de l'automate a charger : " << Colors::fg_white;
-    cin >> name;
-    yolo.loading(name);
+	do {
+		cout << Colors::fg_cyan << "Saisir le nom de l'automate a charger : " << Colors::fg_white;
+		cin >> name;
+		yolo.loading(name);
+	} while (yolo.getFound() == false);
     menu(yolo);
-
-
+	system("pause");
     return 0;
 }
 
