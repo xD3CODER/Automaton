@@ -88,7 +88,7 @@ void Automate::loading(string fileName)
 
 	if (!origine)
 	{
-		cerr << Colors::fg_red << "Automate introuvable !" << Colors::fg_white << endl;
+		cerr << "Automate introuvable !" << endl;
 		return;
 	}
 	else
@@ -247,7 +247,7 @@ bool Automate::isComplet()
     for(i=0; i<_listEtats.size(); i++)
     {
 		cout << _listEtats[i]->getTransitions().size() + "  " + tailleAlphabet;
-		OutputDebugStringW(L"My output string.");
+
         if(_listEtats[i]->getTransitions().size() != tailleAlphabet)
         {
             return false;
@@ -354,7 +354,7 @@ std::vector<Transition> tmp;
 
 
 	cout << setw(50) << left << "0: Quitter" 
-      << setw(20) << left << Colors::fg_green << "*** Informations sur l'automate ***" << Colors::fg_white << endl;
+      << setw(20) << left <<  "*** Informations sur l'automate ***" <<  endl;
 
 	cout << setw(50) << left << "1: Charger un autre Automate"
 		<< setw(20) << left << " Nom de l'automate : " + _fileName << ".txt" << endl;
@@ -394,13 +394,13 @@ std::vector<Transition> tmp;
 
 
 	cout << setw(50) << left << "7: Completer l'automate" 
-		<< setw(20) << left << Colors::fg_green << "***********************************" << Colors::fg_white << endl;
+		<< setw(20) << left <<  "***********************************" <<  endl;
 
 
 	cout << "8: Standardiser l'automate" << endl;
 
 	cout << setw(50) << "9: Complementariser l'automate"
-		<< setw(20) << left << Colors::fg_cyan << "********* Automate obtenu *********" << Colors::fg_white << endl;
+		<< setw(20) << left <<  "********* Automate obtenu *********" << endl;
 
 	cout << setw(50) << left << "10: Minimiser l'automate" 
 		<< setw(20) << left << " Etats initiaux ";

@@ -22,7 +22,6 @@ void inverser(Automate &arg);
 void minimiser(Automate &arg);
 void testerMot(Automate &arg);
 
-HANDLE hConsole;
 
 
 
@@ -32,7 +31,7 @@ int main()
     Automate yolo;
     string name;
 	do {
-		cout << Colors::fg_cyan << "Saisir le nom de l'automate a charger : " << Colors::fg_white;
+		cout << "Saisir le nom de l'automate a charger : ";
 		cin >> name;
 		yolo.loading(name);
 	} while (yolo.getFound() == false);
@@ -43,7 +42,6 @@ int main()
 
 void menu(Automate  &arg)
 {
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     int choix = 1;
     while(choix != 0)
     {

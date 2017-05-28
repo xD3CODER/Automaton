@@ -107,7 +107,6 @@
   <ItemGroup>
     <ClInclude Include="Alphabet.h" />
     <ClInclude Include="Automate.h" />
-    <ClInclude Include="Console.h" />
     <ClInclude Include="Etat.h" />
     <ClInclude Include="Transition.h" />
     <ClInclude Include="Utils.h" />
