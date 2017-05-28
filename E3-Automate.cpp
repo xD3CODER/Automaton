@@ -6,16 +6,17 @@
 
 using namespace std;
 
-const string Automate::FILES_PREFIX = "E3-Automates/E3-";
+/* Définition d'un préfixe pour le chargement des fichiers. Utile si les automates sont dans un dossier différent */
+const string Automate::FILES_PREFIX = "E3-";
 
 Automate::Automate()
 {
-	//ctor
+	// Constructeur vite
 }
 
 Automate::~Automate()
 {
-	//dtor
+	// Destructeur vide
 }
 
 int Automate::rechercheIndiceEtat(string nom)
