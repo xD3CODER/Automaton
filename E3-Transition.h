@@ -1,7 +1,7 @@
 #ifndef TRANSITION_H
 #define TRANSITION_H
 
-#include "Etat.h"
+#include "E3-Etat.h"
 
 class Etat;
 

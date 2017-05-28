@@ -1,4 +1,4 @@
-#include "Automate.h"
+#include "E3-Automate.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const string Automate::FILES_PREFIX = "Automates/";
+const string Automate::FILES_PREFIX = "E3-Automates/E3-";
 
 Automate::Automate()
 {

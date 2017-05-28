@@ -2,9 +2,9 @@
 #define AUTOMATE_H
 
 #include <vector>
-#include "Alphabet.h"
-#include "Etat.h"
-#include "Utils.h"
+#include "E3-Alphabet.h"
+#include "E3-Etat.h"
+#include "E3-Utils.h"
 
 class Automate
 {

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Automate.h"
+#include "E3-Automate.h"
 #include <stdlib.h>
 
 using namespace std;

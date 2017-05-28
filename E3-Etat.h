@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Transition.h"
+#include "E3-Transition.h"
 class Transition;
 
 class Etat
