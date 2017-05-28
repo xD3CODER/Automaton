@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "Utils.h"
 #include <fstream>
 #include <ctype.h>
 
@@ -17,11 +17,9 @@ int Utils::getNumberOfChar(ifstream &file)
 	while (file.get(c)) { // Lecture du fichier char by char
 		if (isalpha(c)) // Si le caractère est une lettre
 		{
-		
 			if (occ.find(c) == string::npos) { // Si la lettre n'a pas été vu précédemment
 				occ += c; // On ajoute la lettre à notre string de vérification
 				nbOfChar++; // On incrémente le nombre de caractères trouvés
-				
 			}
 		}
 	}
@@ -38,11 +36,14 @@ void Utils::lineJump(int nbOfJump)
 }
 
 void Utils::consoleClear() {
-	system("cls");
+	#if _WIN32
+		system("cls");
+	#elif __linux__
+		system("clear");
+	#endif
 }
 
 std::string Utils::ToString(int val)
 {
-
 	return std::to_string(val);
 }

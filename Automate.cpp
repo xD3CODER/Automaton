@@ -80,11 +80,11 @@ void Automate::standardiser()
 
 void Automate::loading(string fileName)
 {
-	
+
 	this->_fileName = fileName;
 	_util.consoleClear();
 	ifstream origine;
-	origine.open("Automates/A6-" + fileName +".txt", ios::in); //Ouverture du fichier en lecture
+	origine.open("Automates/" + fileName +".txt", ios::in); //Ouverture du fichier en lecture
 
 	if (!origine)
 	{
@@ -98,16 +98,16 @@ void Automate::loading(string fileName)
 
 	int tmpInt, nbrLecture, source, dest;
 	char tmpChar;
-	
+
 	int nbChar = _util.getNumberOfChar(origine);
 	for (int i = 0; i < nbChar; i++) //initialisation de l'alphabet avec le nombre de caractères trouvés
 	{
-	
+
 		_abcd.addCaratere(97 + i); //Ajout du caractère avec code ASCI
-		
+
 	}
 
-	// On retourne au début du fichier pour la lecture des paramètres suivants 
+	// On retourne au début du fichier pour la lecture des paramètres suivants
 	origine.clear();
 	origine.seekg(0, ios::beg);
 
@@ -125,13 +125,13 @@ void Automate::loading(string fileName)
 	{
 		_listEtats.push_back(new Etat(_util.ToString(i)));
 	}
-	
+
 	origine >> nbrLecture;//nombre d'états initiaux
 
 	//cout << "   Nombre d'etats initiaux : " + _util.ToString(nbrLecture) << endl;
 	for (int i = 0; i<nbrLecture; i++)//mettre les états initiaux
 	{
-	
+
 		origine >> tmpInt;
        _listEtats[rechercheIndiceEtat(_util.ToString(tmpInt))]->setEntree(true); // On initialise l'état lue comme étant un état initial grace a son index
 	}
@@ -155,7 +155,7 @@ void Automate::loading(string fileName)
 		// On créer une transition depuis l'état de départ vers l'état d'arrivée contenant le caractere de l'alphabet qui permet de faire cette transition
 		_listEtats[rechercheIndiceEtat(_util.ToString(source))]->addTransition(Transition(_listEtats[rechercheIndiceEtat(_util.ToString(dest))], tmpChar));
 	}
-		
+
 	// cout << Colors::fg_green << "***********************************" << Colors::fg_white << endl;
 	 _util.lineJump(1);
 }
@@ -246,7 +246,7 @@ bool Automate::isComplet()
     tailleAlphabet = _abcd.getTailleAlphabet();
     for(i=0; i<_listEtats.size(); i++)
     {
-		cout << _listEtats[i]->getTransitions().size() + "  " + tailleAlphabet;
+		//cout << _listEtats[i]->getTransitions().size() + "  " + tailleAlphabet;
 
         if(_listEtats[i]->getTransitions().size() != tailleAlphabet)
         {
@@ -353,13 +353,13 @@ std::vector<Transition> tmp;
 	}
 
 
-	cout << setw(50) << left << "0: Quitter" 
+	cout << setw(50) << left << "0: Quitter"
       << setw(20) << left <<  "*** Informations sur l'automate ***" <<  endl;
 
 	cout << setw(50) << left << "1: Charger un autre Automate"
 		<< setw(20) << left << " Nom de l'automate : " + _fileName << ".txt" << endl;
 
-	cout << setw(50) << left << "2: Savoir si l'aumotate est Synchrone" 
+	cout << setw(50) << left << "2: Savoir si l'aumotate est Synchrone"
 		<< setw(20) << left << " Elements dans l'alphabet : " + _util.ToString(_abcd.getTailleAlphabet()) << endl;
 
 
@@ -368,11 +368,11 @@ std::vector<Transition> tmp;
 		<< setw(20) << left << " Nombre d'etats : " + _util.ToString(_listEtats.size()) << endl;
 
 
-	cout << setw(50) << left << "4: Savoir si l'automate est Standart" 
+	cout << setw(50) << left << "4: Savoir si l'automate est Standart"
 	<< setw(20) << left << " Nombre d'etats initiaux : " + _util.ToString(_initialStates.size()) << endl;
-	
-	
-	
+
+
+
 	cout << setw(50) << left << "5: Savoir si l'automate est Complet"
 	<< setw(20) << left << " Nombre d'etats terminaux : " + _util.ToString(_finalStates.size()) << endl;
 
@@ -385,7 +385,7 @@ std::vector<Transition> tmp;
 			cpt++;
 		}
 	}
-	cout << setw(50) << left << "6: Determiniser l'automate" 
+	cout << setw(50) << left << "6: Determiniser l'automate"
 		<< setw(20) << left << " Nombre de transitions : " + _util.ToString(cpt) << endl;
 	cpt = 0;
 
@@ -393,7 +393,7 @@ std::vector<Transition> tmp;
 
 
 
-	cout << setw(50) << left << "7: Completer l'automate" 
+	cout << setw(50) << left << "7: Completer l'automate"
 		<< setw(20) << left <<  "***********************************" <<  endl;
 
 
@@ -402,7 +402,7 @@ std::vector<Transition> tmp;
 	cout << setw(50) << "9: Complementariser l'automate"
 		<< setw(20) << left <<  "********* Automate obtenu *********" << endl;
 
-	cout << setw(50) << left << "10: Minimiser l'automate" 
+	cout << setw(50) << left << "10: Minimiser l'automate"
 		<< setw(20) << left << " Etats initiaux ";
 	cout << "[";
 	//Les états initiaux
@@ -412,9 +412,9 @@ std::vector<Transition> tmp;
 	}
 	cout << "]" << endl;
 
-	
 
-	cout << setw(50) << left <<  "11: Tester un mot sur l'automate" 
+
+	cout << setw(50) << left <<  "11: Tester un mot sur l'automate"
 		<< setw(20) << left << " Etats Terminaux ";
 	cout << "[";
 	//Les etats terminaux
@@ -431,7 +431,7 @@ std::vector<Transition> tmp;
 		tmp = _listEtats[i]->getTransitions();
 		for (j = 0; j < tmp.size(); j++)
 		{
-			
+
 			cout << setw(50) << left << " " << setw (20) << left  << " (" + _listEtats[i]->getNom() + ") -> " + tmp[j].getCaractere() + " -> (" + tmp[j].getArrivee()->getNom() + ")" << std::endl;
 		}
 	}
@@ -448,7 +448,7 @@ std::vector<Transition> tmp;
 
 	// std::cout << "\n" <<cpt << " ";
 	_util.lineJump(1);
-	
+
 	//nbr transitions
 	_util.lineJump(1);
 

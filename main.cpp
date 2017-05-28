@@ -1,5 +1,4 @@
 #include <iostream>
-#include <windows.h>
 #include "Automate.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,7 +35,11 @@ int main()
 		yolo.loading(name);
 	} while (yolo.getFound() == false);
     menu(yolo);
-	system("pause");
+
+    #if _WIN32
+	   system("pause");
+    #endif
+
     return 0;
 }
 
@@ -53,7 +56,7 @@ void menu(Automate  &arg)
             cin.clear();
         }while(cin.fail());
 
-        system("cls");
+        Utils::consoleClear();
 
         switch(choix)
         {

@@ -1,4 +1,3 @@
-
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -8,12 +7,10 @@
 
 class Utils
 {
-
 public:
 	Utils();
     int getNumberOfChar(std::ifstream &file);
 	void lineJump(int nbOfSpace);
-	void consoleClear();
+	static void consoleClear();
 	std::string ToString(int val);
-
 };
