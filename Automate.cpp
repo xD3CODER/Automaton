@@ -79,7 +79,6 @@ void Automate::standardiser()
 void Automate::loading(string fileName)
 {
 	this->_fileName = fileName;
-	_util.consoleClear();
 	ifstream origine;
 	origine.open(Automate::FILES_PREFIX + fileName +".txt", ios::in); //Ouverture du fichier en lecture
 
@@ -361,7 +360,7 @@ std::vector<Transition> tmp;
 		<< setw(20) << left << " Nombre d'etats : " + _util.ToString(_listEtats.size()) << endl;
 
 
-	cout << setw(50) << left << "4: Savoir si l'automate est Standart"
+	cout << setw(50) << left << "4: Savoir si l'automate est Standard"
 	<< setw(20) << left << " Nombre d'etats initiaux : " + _util.ToString(_initialStates.size()) << endl;
 
 
@@ -500,20 +499,19 @@ void Automate::analyseMot(std::string mot)
     std::vector<Transition> tmp;
     Etat* actuel = new Etat;
 
-    if(this->isDeterministe() == false)
-        this->determiniser();
-    if(this->isComplet() == false)
-        this->completer();
-
     for(i = 0; i < mot.size(); i++)
     {
-        if(_abcd.inAlphabet(mot[i]) == false)
+        if(_abcd.inAlphabet(mot[i]) == false && mot != "*")
         {
             std::cout << mot << " n'est pas un mot reconnu par l'automate" << std::endl;
             return;
         }
     }
 
+    if(this->isDeterministe() == false)
+        this->determiniser();
+    if(this->isComplet() == false)
+        this->completer();
 
     //Init actuel avec l'entree
     for(i = 0; i < _listEtats.size(); i++)
@@ -523,6 +521,12 @@ void Automate::analyseMot(std::string mot)
             actuel = _listEtats[i];
             break;
         }
+    }
+
+    if(actuel->getSortie() == true && mot == "*") {
+        std::cout << "L'automate reconnait le mot vide." << std::endl;
+        this->reload();
+        return;
     }
 
     for(i = 0; i < mot.size(); i++)
@@ -541,6 +545,8 @@ void Automate::analyseMot(std::string mot)
         std::cout << mot << " est un mot reconnu par l'automate" << std::endl;
     else
         std::cout << mot << " n'est pas un mot reconnu par l'automate" << std::endl;
+
+    this->reload();
 }
 
 void Automate::reset()
@@ -552,6 +558,14 @@ void Automate::reset()
         delete _listEtats[i];
 
     _listEtats.clear();
+}
+
+void Automate::reload() {
+    std::string filename;
+    filename = this->_fileName;
+
+    this->reset();
+    this->loading(filename);
 }
 
 Automate& Automate::operator=(const Automate &arg)

@@ -28,6 +28,7 @@ class Automate
         void print();
         void analyseMot(std::string mot);
         void reset();
+        void reload();
 		void setFound(bool state) { _found = state; };
 		bool getFound() { return _found; };
         Automate& operator=(const Automate &arg);

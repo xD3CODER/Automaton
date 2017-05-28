@@ -17,6 +17,7 @@ void standardiser(Automate &arg);
 void inverser(Automate &arg);
 void minimiser(Automate &arg);
 void testerMot(Automate &arg);
+void reload(Automate &arg);
 
 int main()
 {
@@ -28,6 +29,8 @@ int main()
 		cin >> name;
 		automate.loading(name);
 	} while (automate.getFound() == false);
+
+    Utils::consoleClear();
     menu(automate);
 
     #if _WIN32
@@ -88,6 +91,11 @@ void menu(Automate  &arg)
             case 11:
                 testerMot(arg);
                 break;
+            case 12:
+                reload(arg);
+                break;
+            default:
+                break;
         }
     }
 }
@@ -123,9 +131,9 @@ void connaitreDeterministe(Automate &arg)
 void connaitreStandart(Automate &arg)
 {
     if(arg.isStandart())
-        cout << "Automate Standart" << endl;
+        cout << "Automate Standard" << endl;
     else
-        cout << "Automate Non Standart" << endl;
+        cout << "Automate Non Standard" << endl;
 }
 
 void connaitreComplet(Automate &arg)
@@ -170,4 +178,9 @@ void testerMot(Automate &arg)
 
 
     arg.analyseMot(mot);
+}
+
+void reload(Automate &arg)
+{
+    arg.reload();
 }
