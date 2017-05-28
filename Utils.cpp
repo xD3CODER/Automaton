@@ -1,6 +1,7 @@
 #include "Utils.h"
 #include <fstream>
 #include <ctype.h>
+#include <iostream>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ using namespace std;
 Utils::Utils()
 {
 }
+
 /*
 int Utils::getNumberOfChar(ifstream &file)
 {
@@ -35,15 +37,16 @@ void Utils::lineJump(int nbOfJump)
 	}
 }
 
-void Utils::consoleClear() {
-	#if _WIN32
-		system("cls");
-	#elif __linux__
+void Utils::consoleClear()
+{
+#if _WIN32
+	system("cls");
+#elif __linux__
 		system("clear");
-	#endif
+#endif
 }
 
-std::string Utils::ToString(int val)
+string Utils::ToString(int val) const
 {
-	return std::to_string(val);
+	return to_string(val);
 }

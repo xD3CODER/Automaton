@@ -2,35 +2,36 @@
 
 Transition::Transition()
 {
-    //ctor
+	//ctor
 }
 
-Transition::Transition(Etat *arrivee, char caractere)
+Transition::Transition(Etat* arrivee, char caractere)
 {
-    _arrivee = arrivee;
-    _caractere = caractere;
+	_arrivee = arrivee;
+	_caractere = caractere;
 }
 
 Transition::~Transition()
 {
-    _arrivee = NULL;
+	_arrivee = nullptr;
 }
 
-char Transition::getCaractere()
+char Transition::getCaractere() const
 {
-    return _caractere;
+	return _caractere;
 }
 
-Etat* Transition::getArrivee()
+Etat* Transition::getArrivee() const
 {
-    return _arrivee;
+	return _arrivee;
 }
-bool Transition::operator==(Transition &arg)
+
+bool Transition::operator==(Transition& arg) const
 {
-    if(_caractere == arg.getCaractere())
-    {
-        if(_arrivee == arg.getArrivee())
-            return true;
-    }
-    return false;
+	if (_caractere == arg.getCaractere())
+	{
+		if (_arrivee == arg.getArrivee())
+			return true;
+	}
+	return false;
 }

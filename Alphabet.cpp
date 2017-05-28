@@ -1,51 +1,51 @@
 #include "Alphabet.h"
 
 
-
 Alphabet::Alphabet()
 {
-    //ctor
+	//ctor
 }
 
 Alphabet::~Alphabet()
 {
-    //dtor
+	//dtor
 }
 
 void Alphabet::addCaratere(char nouveau)
 {
-    _caracteres.push_back(nouveau);
+	_caracteres.push_back(nouveau);
 }
 
-unsigned int Alphabet::getTailleAlphabet()
+unsigned int Alphabet::getAlphabetSize() const
 {
-    return _caracteres.size();
-}
-Alphabet& Alphabet::operator=(const Alphabet &arg)
-{
-    _caracteres = arg._caracteres;
-
-    return *this;
+	return _caracteres.size();
 }
 
-std::vector<char> Alphabet::getAlphabet()
+Alphabet& Alphabet::operator=(const Alphabet& arg)
 {
-    return _caracteres;
+	_caracteres = arg._caracteres;
+
+	return *this;
+}
+
+std::vector<char> Alphabet::getAlphabet() const
+{
+	return _caracteres;
 }
 
 bool Alphabet::inAlphabet(char arg)
 {
-    unsigned int i;
+	unsigned int i;
 
-    for(i = 0; i < _caracteres.size(); i++)
-    {
-        if(_caracteres[i] == arg)
-            return true;
-    }
-    return false;
+	for (i = 0; i < _caracteres.size(); i++)
+	{
+		if (_caracteres[i] == arg)
+			return true;
+	}
+	return false;
 }
 
 void Alphabet::reset()
 {
-    _caracteres.clear();
+	_caracteres.clear();
 }

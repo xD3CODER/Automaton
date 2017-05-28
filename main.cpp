@@ -1,186 +1,189 @@
 #include <iostream>
 #include "Automate.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 using namespace std;
 
-void menu(Automate &arg);
-void charger(Automate &arg);
-void connaitreSynchrone(Automate &arg);
-void connaitreDeterministe(Automate &arg);
-void connaitreStandart(Automate &arg);
-void connaitreComplet(Automate &arg);
-void determiniser(Automate &arg);
-void completer(Automate &arg);
-void standardiser(Automate &arg);
-void inverser(Automate &arg);
-void minimiser(Automate &arg);
-void testerMot(Automate &arg);
-void reload(Automate &arg);
+void menu(Automate& arg);
+void charger(Automate& arg);
+void askSync(Automate& arg);
+void askDeterministe(Automate& arg);
+void askStandard(Automate& arg);
+void askComplet(Automate& arg);
+void doDeterministe(Automate& arg);
+void doComplet(Automate& arg);
+void doStandard(Automate& arg);
+void doInvert(Automate& arg);
+void doMinify(Automate& arg);
+void testingWord(Automate& arg);
+void reload(Automate& arg);
 
 int main()
 {
-
-    Automate automate;
-    string name;
-	do {
+	Automate automate;
+	string name;
+	do
+	{
 		cout << "Saisir le nom de l'automate a charger : ";
 		cin >> name;
 		automate.loading(name);
-	} while (automate.getFound() == false);
+	}
+	while (automate.getFound() == false);
 
-    Utils::consoleClear();
-    menu(automate);
+	Utils::consoleClear();
+	menu(automate);
 
-    #if _WIN32
-	   system("pause");
-    #endif
 
-    return 0;
+#if _WIN32
+	system("pause");
+#endif
+
+	return 0;
 }
 
-void menu(Automate  &arg)
+void menu(Automate& arg)
 {
-    int choix = 1;
-    while(choix != 0)
-    {
+	int choix = 1;
+	while (choix != 0)
+	{
 		arg.print();
-        do {
-            cin.clear();
-            cin >> choix;
-            cin.clear();
-        } while(cin.fail());
+		do
+		{
+			cin.clear();
+			cin >> choix;
+			cin.clear();
+		}
+		while (cin.fail());
 
-        Utils::consoleClear();
+		Utils::consoleClear();
 
-        switch(choix) {
-            case 0:
-                return;
-                break;
-            case 1:
-                charger(arg);
-                break;
-            case 2:
-                connaitreSynchrone(arg);
-                break;
-            case 3:
-                connaitreDeterministe(arg);
-                break;
-            case 4:
-                connaitreStandart(arg);
-                break;
-            case 5:
-                connaitreComplet(arg);
-                break;
-            case 6:
-                determiniser(arg);
-                break;
-            case 7:
-                completer(arg);
-                break;
-            case 8:
-                standardiser(arg);
-                break;
-            case 9:
-                inverser(arg);
-                break;
-            case 10:
-                minimiser(arg);
-                break;
-            case 11:
-                testerMot(arg);
-                break;
-            case 12:
-                reload(arg);
-                break;
-            default:
-                break;
-        }
-    }
+		switch (choix)
+		{
+		case 0:
+			return;
+		case 1:
+			charger(arg);
+			break;
+		case 2:
+			askSync(arg);
+			break;
+		case 3:
+			askDeterministe(arg);
+			break;
+		case 4:
+			askStandard(arg);
+			break;
+		case 5:
+			askComplet(arg);
+			break;
+		case 6:
+			doDeterministe(arg);
+			break;
+		case 7:
+			doComplet(arg);
+			break;
+		case 8:
+			doStandard(arg);
+			break;
+		case 9:
+			doInvert(arg);
+			break;
+		case 10:
+			doMinify(arg);
+			break;
+		case 11:
+			testingWord(arg);
+			break;
+		case 12:
+			reload(arg);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
-void charger(Automate &arg)
+void charger(Automate& arg)
 {
-    string name;
-    do {
-        cout << "Saisir le nom de l'automate a charger : ";
-        cin >> name;
+	string name;
+	do
+	{
+		cout << "Saisir le nom de l'automate a charger : ";
+		cin >> name;
 
-        arg.reset();
-        arg.loading(name);
-    } while (arg.getFound() == false);
+		arg.reset();
+		arg.loading(name);
+	}
+	while (arg.getFound() == false);
 }
 
-void connaitreSynchrone(Automate &arg)
+void askSync(Automate& arg)
 {
-    if(arg.isSynchrone())
-        cout << "Automate Synchrone" << endl;
-    else
-        cout << "Automate Asynchrone" << endl;
+	if (arg.isSynchrone())
+		cout << "L'automate est synchrone" << endl;
+	else
+		cout << "L'automate est asynchrone" << endl;
 }
 
-void connaitreDeterministe(Automate &arg)
+void askDeterministe(Automate& arg)
 {
-    if(arg.isDeterministe())
-        cout << "Automate Deterministe" << endl;
-    else
-        cout << "Automate Non Deterministe" << endl;
+	if (arg.isDeterministe())
+		cout << "L'automate est deterministe" << endl;
+	else
+		cout << "L'automate n'est pas deterministe" << endl;
 }
 
-void connaitreStandart(Automate &arg)
+void askStandard(Automate& arg)
 {
-    if(arg.isStandart())
-        cout << "Automate Standard" << endl;
-    else
-        cout << "Automate Non Standard" << endl;
+	if (arg.isStandard())
+		cout << "L'automate est standard" << endl;
+	else
+		cout << "L'automate n'est pas standard" << endl;
 }
 
-void connaitreComplet(Automate &arg)
+void askComplet(Automate& arg)
 {
-    if(arg.isComplet())
-        cout << "Automate Complet" << endl;
-    else
-        cout << "Automate Non Complet" << endl;
+	if (arg.isComplet())
+		cout << "L'automate est complet" << endl;
+	else
+		cout << "L'automate n'est pas complet" << endl;
 }
 
-void determiniser(Automate & arg)
+void doDeterministe(Automate& arg)
 {
-    arg.determiniser();
+	arg.determiniser();
 }
 
-void completer(Automate &arg)
+void doComplet(Automate& arg)
 {
-    arg.completer();
+	arg.completer();
 }
 
-void standardiser(Automate &arg)
+void doStandard(Automate& arg)
 {
-    arg.standardiser();
+	arg.standardiser();
 }
 
-void inverser(Automate &arg)
+void doInvert(Automate& arg)
 {
-    arg.inverser();
+	arg.inverser();
 }
 
-void minimiser(Automate &arg)
+void doMinify(Automate& arg)
 {
-    arg.minimiser();
+	arg.minimiser();
 }
 
-void testerMot(Automate &arg)
+void testingWord(Automate& arg)
 {
-    string mot;
-    cin.clear();
-    cout << "Saisir le mot a tester : ";
-    cin >> mot;
-
-
-    arg.analyseMot(mot);
+	string mot;
+	cin.clear();
+	cout << "Quel mot souhaitez-vous tester ? " << endl;
+	cin >> mot;
+	arg.analyseMot(mot);
 }
 
-void reload(Automate &arg)
+void reload(Automate& arg)
 {
-    arg.reload();
+	arg.reload();
 }

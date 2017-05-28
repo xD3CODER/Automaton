@@ -7,17 +7,17 @@ class Etat;
 
 class Transition
 {
-    public:
-        Transition();
-        Transition(Etat *arrivee, char caractere);
-        char getCaractere();
-        Etat* getArrivee();
-        virtual ~Transition();
-        bool operator==(Transition &arg);
-    protected:
-        Etat *_arrivee;
-        char _caractere;
-    private:
+public:
+	Transition();
+	Transition(Etat* arrivee, char caractere);
+	char getCaractere() const;
+	Etat* getArrivee() const;
+	virtual ~Transition();
+	bool operator==(Transition& arg) const;
+protected:
+	Etat* _arrivee;
+	char _caractere;
+private:
 };
 
 #endif // TRANSITION_H
