@@ -31,9 +31,8 @@ int Automate::rechercheIndiceEtat(string nom)
 
 void Automate::minimiser()
 {
-	unsigned int i;
 	vector<Etat*> terminaux, nonTerminaux;
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getExit())
 			terminaux.push_back(_listStates[i]);
@@ -46,13 +45,13 @@ void Automate::standardiser()
 {
 	if (this->isStandard())
 		return;
-	unsigned int i;
-	vector<Transition> tmp;
+
+
 	Etat* entree = new Etat("i");
 
 	entree->setEntry(true);
 
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		//Si l'etat est une entree on recopie ses transitions
 		if (_listStates[i]->getEntry())
@@ -61,7 +60,7 @@ void Automate::standardiser()
 			if (_listStates[i]->getExit())
 				entree->setExit(true);
 
-			tmp = _listStates[i]->getTransitions();
+			vector<Transition> tmp = _listStates[i]->getTransitions();
 			entree->addTransitions(tmp);
 			entree->suppDoublonsTransitions();
 
@@ -150,12 +149,10 @@ void Automate::loading(string fileName)
 
 bool Automate::isSynchrone()
 {
-	unsigned int i, j;
-	vector<Transition> tmp;
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
-		tmp = _listStates[i]->getTransitions();
-		for (j = 0; j < tmp.size(); j++)
+		vector<Transition> tmp = _listStates[i]->getTransitions();
+		for (unsigned int j = 0; j < tmp.size(); j++)
 		{
 			if (tmp[j].getCaractere() == '*')
 				return false;
@@ -193,10 +190,9 @@ bool Automate::isDeterministe()
 
 bool Automate::isStandard()
 {
-	unsigned int i, entrees;
 	//Si il y a plusieurs entrees l'automate n'est pas standart
-	entrees = 0;
-	for (i = 0; i < _listStates.size(); i++)
+	unsigned int entrees = 0;
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getEntry())
 		{
@@ -207,7 +203,7 @@ bool Automate::isStandard()
 	}
 
 	//Si une transition revient sur l'etat initial l'automate n'est as standart
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->transitionsEtatInitial())
 		{
@@ -219,8 +215,6 @@ bool Automate::isStandard()
 
 bool Automate::isComplet()
 {
-	unsigned int i, tailleAlphabet;
-
 	//Si un automate n'est pas déterministe alors il ne peux pas etre complet
 	if (this->isDeterministe() == false)
 	{
@@ -228,8 +222,8 @@ bool Automate::isComplet()
 	}
 
 	//Si un etat n'as pas autant de transitions qu'il y a de charactere dans l'alphabet
-	tailleAlphabet = _abcd.getAlphabetSize();
-	for (i = 0; i < _listStates.size(); i++)
+	unsigned int tailleAlphabet = _abcd.getAlphabetSize();
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		//cout << _listEtats[i]->getTransitions().size() + "  " + tailleAlphabet;
 
@@ -244,8 +238,6 @@ bool Automate::isComplet()
 
 void Automate::determiniser()
 {
-	unsigned int i, j, k;
-	vector<Transition> tmpTransitions;
 	Automate deterministe;
 	Etat* tmp = nullptr;
 
@@ -253,7 +245,7 @@ void Automate::determiniser()
 	deterministe._abcd = _abcd;
 
 	//Somme des etats initiaux
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getEntry())
 		{
@@ -280,12 +272,12 @@ void Automate::determiniser()
 	deterministe._listStates.push_back(tmp);
 
 	//Temps que tous les états des transitions n'existent pas on les créer
-	for (i = 0; i < deterministe._listStates.size(); i++)
+	for (unsigned int i = 0; i < deterministe._listStates.size(); i++)
 	{
-		tmpTransitions = deterministe._listStates[i]->getTransitions();
+		vector<Transition> tmpTransitions = deterministe._listStates[i]->getTransitions();
 
 
-		for (j = 0; j < tmpTransitions.size(); j++)
+		for (unsigned int j = 0; j < tmpTransitions.size(); j++)
 		{
 			//Si la cible de transition ne fait pas partie de l'automate
 			if (deterministe.rechercheIndiceEtat(tmpTransitions[j].getArrivee()->getNom()) == -1)
@@ -297,7 +289,7 @@ void Automate::determiniser()
 				{
 					//Il faut lui créer ses transitions en fonction de l'automate d'origine
 					//Parcour tout les etats initiaux et si le nom est contenu dans le nouvel état alors somme des états
-					for (k = 0; k < _listStates.size(); k++)
+					for (unsigned int k = 0; k < _listStates.size(); k++)
 					{
 						if (tmpTransitions[j].getArrivee()->getNom().find(_listStates[k]->getNom()) != string::npos)
 						{
@@ -318,18 +310,17 @@ void Automate::determiniser()
 
 void Automate::print()
 {
-	unsigned int i, j, cpt;
-	cpt = 0;
+	unsigned int cpt = 0;
 	vector<Transition> tmp;
 	_finalStates.clear();
 	_initialStates.clear();
 	// Nombre d'états initiaux
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getEntry())
 			_initialStates.push_back(_listStates[i]->getNom());
 	}
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getExit())
 			_finalStates.push_back(_listStates[i]->getNom());
@@ -339,36 +330,36 @@ void Automate::print()
 	cout << setw(50) << left << "0: Quitter"
 		<< setw(20) << left << "*** Informations sur l'automate ***" << endl;
 
-	cout << setw(50) << left << "1: Charger un autre Automate"
+	cout << setw(50) << left << "1: Changer d'automate"
 		<< setw(20) << left << " Nom de l'automate : " + _fileName << ".txt" << endl;
 
-	cout << setw(50) << left << "2: Savoir si l'aumotate est Synchrone"
+	cout << setw(50) << left << "2: Savoir si l'aumotate est synchrone"
 		<< setw(20) << left << " Elements dans l'alphabet : " + _util.ToString(_abcd.getAlphabetSize()) << endl;
 
 
-	cout << setw(50) << left << "3: Savoir si l'automate est Deterministe"
+	cout << setw(50) << left << "3: Savoir si l'automate est deterministe"
 		<< setw(20) << left << " Nombre d'etats : " + _util.ToString(_listStates.size()) << endl;
 
 
-	cout << setw(50) << left << "4: Savoir si l'automate est Standard"
+	cout << setw(50) << left << "4: Savoir si l'automate est standard"
 		<< setw(20) << left << " Nombre d'etats initiaux : " + _util.ToString(_initialStates.size()) << endl;
 
 
-	cout << setw(50) << left << "5: Savoir si l'automate est Complet"
+	cout << setw(50) << left << "5: Savoir si l'automate est complet"
 		<< setw(20) << left << " Nombre d'etats terminaux : " + _util.ToString(_finalStates.size()) << endl;
 
 
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		tmp = _listStates[i]->getTransitions();
-		for (j = 0; j < tmp.size(); j++)
+		for (unsigned int j = 0; j < tmp.size(); j++)
 		{
 			cpt++;
 		}
 	}
 	cout << setw(50) << left << "6: Determiniser l'automate"
 		<< setw(20) << left << " Nombre de transitions : " + _util.ToString(cpt) << endl;
-	cpt = 0;
+	//cpt = 0;
 
 
 	cout << setw(50) << left << "7: Completer l'automate"
@@ -384,18 +375,18 @@ void Automate::print()
 		<< setw(20) << left << " Etats initiaux ";
 	cout << "[";
 	//Les états initiaux
-	for (i = 0; i < _initialStates.size(); i++)
+	for (unsigned int i = 0; i < _initialStates.size(); i++)
 	{
 		cout << "(" << _initialStates[i] << ")";
 	}
 	cout << "]" << endl;
 
 
-	cout << setw(50) << left << "11: Tester un mot sur l'automate"
+	cout << setw(50) << left << "11: Entrer un mot a tester"
 		<< setw(20) << left << " Etats Terminaux ";
 	cout << "[";
 	//Les etats terminaux
-	for (i = 0; i < _finalStates.size(); i++)
+	for (unsigned int i = 0; i < _finalStates.size(); i++)
 	{
 		cout << "(" << _finalStates[i] << ")";
 	}
@@ -403,10 +394,10 @@ void Automate::print()
 
 
 	//Les transitions
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		tmp = _listStates[i]->getTransitions();
-		for (j = 0; j < tmp.size(); j++)
+		for (unsigned int j = 0; j < tmp.size(); j++)
 		{
 			cout << setw(50) << left << " " << setw(20) << left << " (" + _listStates[i]->getNom() + ") -> " + tmp[j].getCaractere() + " -> (" + tmp[j].getArrivee()->getNom() + ")" << endl;
 		}
@@ -425,20 +416,18 @@ void Automate::print()
 
 void Automate::completer()
 {
-	unsigned int i;
-	Etat* poubelle;
 	if (this->isComplet())
 		return;
 
 
-	poubelle = new Etat("P");
+	Etat* poubelle = new Etat("P");
 	//Initialisatin de la poubelle
-	for (i = 0; i < _abcd.getAlphabetSize(); i++)
+	for (unsigned int i = 0; i < _abcd.getAlphabetSize(); i++)
 	{
 		poubelle->addTransition(Transition(poubelle, _abcd.getAlphabet()[i]));
 	}
 
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getTransitions().size() != _abcd.getAlphabetSize())
 		{
@@ -451,12 +440,10 @@ void Automate::completer()
 
 void Automate::inverser()
 {
-	unsigned int i;
-
 	if (this->isComplet() == false)
 		this->completer();
 
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getExit())
 			_listStates[i]->setExit(false);
@@ -467,15 +454,13 @@ void Automate::inverser()
 
 void Automate::analyseMot(string mot)
 {
-	unsigned int i, j;
-	vector<Transition> tmp;
 	Etat* actuel = new Etat;
 
-	for (i = 0; i < mot.size(); i++)
+	for (unsigned int i = 0; i < mot.size(); i++)
 	{
 		if (_abcd.inAlphabet(mot[i]) == false && mot != "*")
 		{
-			cout << mot << " n'est pas un mot reconnu par l'automate" << endl;
+			cout << mot << " n'est pas un mot reconaissable par cet automate" << endl;
 			return;
 		}
 	}
@@ -486,7 +471,7 @@ void Automate::analyseMot(string mot)
 		this->completer();
 
 	//Init actuel avec l'entree
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->getEntry())
 		{
@@ -497,16 +482,16 @@ void Automate::analyseMot(string mot)
 
 	if (actuel->getExit() == true && mot == "*")
 	{
-		cout << "L'automate reconnait le mot vide." << endl;
+		cout << "L'automate reconnait le mot vide" << endl;
 		this->reload();
 		return;
 	}
 
-	for (i = 0; i < mot.size(); i++)
+	for (unsigned int i = 0; i < mot.size(); i++)
 	{
-		tmp = actuel->getTransitions();
+		vector<Transition> tmp = actuel->getTransitions();
 
-		for (j = 0; j < tmp.size(); j++)
+		for (unsigned int j = 0; j < tmp.size(); j++)
 		{
 			if (tmp[j].getCaractere() == mot[i])
 				actuel = tmp[j].getArrivee();
@@ -514,19 +499,18 @@ void Automate::analyseMot(string mot)
 	}
 
 	if (actuel->getExit() == true)
-		cout << mot << " est un mot reconnu par l'automate" << endl;
+		cout << mot << " est un mot reconaissable par cet automate" << endl;
 	else
-		cout << mot << " n'est pas un mot reconnu par l'automate" << endl;
+		cout << mot << " n'est pas un mot reconaissable par cet automate" << endl;
 
 	this->reload();
 }
 
 void Automate::reset()
 {
-	unsigned int i;
 	_abcd.reset();
 
-	for (i = 0; i < _listStates.size(); i++)
+	for (unsigned int i = 0; i < _listStates.size(); i++)
 		delete _listStates[i];
 
 	_listStates.clear();
@@ -534,8 +518,7 @@ void Automate::reset()
 
 void Automate::reload()
 {
-	string filename;
-	filename = this->_fileName;
+	string filename = this->_fileName;
 
 	this->reset();
 	this->loading(filename);
