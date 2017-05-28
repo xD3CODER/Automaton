@@ -94,19 +94,17 @@ void Automate::loading(string fileName)
 	int tmpInt, nbrLecture, source, dest;
 	char tmpChar;
 
-	int nbChar = _util.getNumberOfChar(origine);
-	for (int i = 0; i < nbChar; i++) //initialisation de l'alphabet avec le nombre de caractères trouvés
+
+	origine >> tmpInt;//nombre de carateres dans l'alphabet
+
+	for (int i = 0; i < tmpInt; i++) //initialisation de l'alphabet avec le nombre de caractères trouvés
 	{
 
 		_abcd.addCaratere(97 + i); //Ajout du caractère avec code ASCI
 
 	}
 
-	// On retourne au début du fichier pour la lecture des paramètres suivants
-	origine.clear();
-	origine.seekg(0, ios::beg);
 
-	origine >> tmpInt;//nombre de carateres dans l'alphabet
 	/*
 	cout << Colors::fg_green << "*** Informations sur l'automate ***" << Colors::fg_white << endl;
 	cout << " Nom de l'automate : " + fileName << ".txt" << endl;

@@ -8,7 +8,7 @@ using namespace std;
 Utils::Utils()
 {
 }
-
+/*
 int Utils::getNumberOfChar(ifstream &file)
 {
 	int nbOfChar = 0;
@@ -26,7 +26,7 @@ int Utils::getNumberOfChar(ifstream &file)
 
 	return nbOfChar;
 }
-
+*/
 void Utils::lineJump(int nbOfJump)
 {
 	for (int i = 0; i < nbOfJump; i++)
