@@ -225,14 +225,12 @@ bool Automate::isStandart()
 bool Automate::isComplet()
 {
     unsigned int i, tailleAlphabet;
+
     //Si un automate n'est pas déterministe alors il ne peux pas etre complet
 	if (this->isDeterministe() == false)
 	{
 		return false;
-
 	}
-
-
 
     //Si un etat n'as pas autant de transitions qu'il y a de charactere dans l'alphabet
     tailleAlphabet = _abcd.getTailleAlphabet();
@@ -474,6 +472,7 @@ void Automate::completer()
     }
 
     _listEtats.push_back(poubelle);
+
 
 }
 
