@@ -3,8 +3,10 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+
 using namespace std;
 
+const string Automate::FILES_PREFIX = "Automates/";
 
 Automate::Automate()
 {
@@ -15,10 +17,6 @@ Automate::~Automate()
 {
     //dtor
 }
-
-
-
-
 
 int Automate::rechercheIndiceEtat(std::string nom)
 {
@@ -80,20 +78,17 @@ void Automate::standardiser()
 
 void Automate::loading(string fileName)
 {
-
 	this->_fileName = fileName;
 	_util.consoleClear();
 	ifstream origine;
-	origine.open("Automates/" + fileName +".txt", ios::in); //Ouverture du fichier en lecture
+	origine.open(Automate::FILES_PREFIX + fileName +".txt", ios::in); //Ouverture du fichier en lecture
 
-	if (!origine)
-	{
+	if (!origine) {
 		cerr << "Automate introuvable !" << endl;
-		return;
-	}
-	else
-	{
-		this->setFound(true);
+		this->setFound(false);
+        return;
+    } else {
+        this->setFound(true);
 	}
 
 	int tmpInt, nbrLecture, source, dest;

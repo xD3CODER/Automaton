@@ -3,10 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 using namespace std;
-
 
 void menu(Automate &arg);
 void charger(Automate &arg);
@@ -21,20 +18,17 @@ void inverser(Automate &arg);
 void minimiser(Automate &arg);
 void testerMot(Automate &arg);
 
-
-
-
 int main()
 {
 
-    Automate yolo;
+    Automate automate;
     string name;
 	do {
 		cout << "Saisir le nom de l'automate a charger : ";
 		cin >> name;
-		yolo.loading(name);
-	} while (yolo.getFound() == false);
-    menu(yolo);
+		automate.loading(name);
+	} while (automate.getFound() == false);
+    menu(automate);
 
     #if _WIN32
 	   system("pause");
@@ -49,53 +43,51 @@ void menu(Automate  &arg)
     while(choix != 0)
     {
 		arg.print();
-        do
-        {
+        do {
             cin.clear();
             cin >> choix;
             cin.clear();
-        }while(cin.fail());
+        } while(cin.fail());
 
         Utils::consoleClear();
 
-        switch(choix)
-        {
-        case 0:
-            return;
-            break;
-        case 1:
-            charger(arg);
-            break;
-        case 2:
-            connaitreSynchrone(arg);
-            break;
-        case 3:
-            connaitreDeterministe(arg);
-            break;
-        case 4:
-            connaitreStandart(arg);
-            break;
-        case 5:
-            connaitreComplet(arg);
-            break;
-        case 6:
-            determiniser(arg);
-            break;
-        case 7:
-            completer(arg);
-            break;
-        case 8:
-            standardiser(arg);
-            break;
-        case 9:
-            inverser(arg);
-            break;
-        case 10:
-            minimiser(arg);
-            break;
-        case 11:
-            testerMot(arg);
-            break;
+        switch(choix) {
+            case 0:
+                return;
+                break;
+            case 1:
+                charger(arg);
+                break;
+            case 2:
+                connaitreSynchrone(arg);
+                break;
+            case 3:
+                connaitreDeterministe(arg);
+                break;
+            case 4:
+                connaitreStandart(arg);
+                break;
+            case 5:
+                connaitreComplet(arg);
+                break;
+            case 6:
+                determiniser(arg);
+                break;
+            case 7:
+                completer(arg);
+                break;
+            case 8:
+                standardiser(arg);
+                break;
+            case 9:
+                inverser(arg);
+                break;
+            case 10:
+                minimiser(arg);
+                break;
+            case 11:
+                testerMot(arg);
+                break;
         }
     }
 }
@@ -103,11 +95,13 @@ void menu(Automate  &arg)
 void charger(Automate &arg)
 {
     string name;
-    cout << "Saisir le nom de l'automate a charger : ";
-    cin >> name;
+    do {
+        cout << "Saisir le nom de l'automate a charger : ";
+        cin >> name;
 
-    arg.reset();
-    arg.loading("Automates de test/" + name + ".txt");
+        arg.reset();
+        arg.loading(name);
+    } while (arg.getFound() == false);
 }
 
 void connaitreSynchrone(Automate &arg)

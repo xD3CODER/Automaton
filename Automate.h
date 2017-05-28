@@ -39,4 +39,5 @@ class Automate
         Alphabet _abcd;
         std::vector<Etat*> _listEtats; // Contient les index de tous les etats de l'automate
     private:
+        static const std::string FILES_PREFIX;
 };
