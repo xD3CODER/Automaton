@@ -84,7 +84,7 @@ void Automate::loading(string fileName)
 	this->_fileName = fileName;
 	_util.consoleClear();
 	ifstream origine;
-	origine.open("Automates/"+ fileName +".txt", ios::in); //Ouverture du fichier en lecture
+	origine.open("Automates/A6-" + fileName +".txt", ios::in); //Ouverture du fichier en lecture
 
 	if (!origine)
 	{
