@@ -11,7 +11,7 @@ const string Automate::FILES_PREFIX = "E3-";
 
 Automate::Automate()
 {
-	// Constructeur vite
+	// Constructeur vide
 }
 
 Automate::~Automate()
@@ -29,7 +29,9 @@ int Automate::rechercheIndiceEtat(string nom)
 	return -1;
 }
 
-
+/**
+* Méthode de minimisation de l'automate
+*/
 void Automate::minimiser()
 {
 	vector<Etat*> terminaux, nonTerminaux;
@@ -42,12 +44,15 @@ void Automate::minimiser()
 	}
 }
 
+/**
+* Méthode de standardisation de l'automate
+*/
 void Automate::standardiser()
 {
 	if (this->isStandard())
 		return;
 
-
+	// On crée un état d'entrée
 	Etat* entree = new Etat("i");
 
 	entree->setEntry(true);
@@ -73,7 +78,10 @@ void Automate::standardiser()
 	_listStates.push_back(entree);
 }
 
-
+/**
+* Méthode de chargement d'un automate dans la mémoire
+* @see const string Automate::FILES_PREFIX, ligne 10.
+*/
 void Automate::loading(string fileName)
 {
 	this->_fileName = fileName;
@@ -106,7 +114,7 @@ void Automate::loading(string fileName)
 	cout << " Nom de l'automate : " + fileName << ".txt" << endl;
 	cout << " Elements dans l'alphabet : " + _util.ToString(tmpInt) << endl;
 	*/
-	origine >> tmpInt;//nombre d'etats
+	origine >> tmpInt; //nombre d'etats
 
 	//cout << " Nombre d'etats : " + _util.ToString(tmpInt) << endl;
 
@@ -148,6 +156,9 @@ void Automate::loading(string fileName)
 	_util.lineJump(1);
 }
 
+/**
+* Automate synchrone ?
+*/
 bool Automate::isSynchrone()
 {
 	for (unsigned int i = 0; i < _listStates.size(); i++)
@@ -162,6 +173,9 @@ bool Automate::isSynchrone()
 	return true;
 }
 
+/**
+* Automate déterministe ?
+*/
 bool Automate::isDeterministe()
 {
 	unsigned int i, entrees = 0;
@@ -189,9 +203,12 @@ bool Automate::isDeterministe()
 	return true;//Automate déterministe
 }
 
+/**
+* Automate standard ?
+*/
 bool Automate::isStandard()
 {
-	//Si il y a plusieurs entrees l'automate n'est pas standart
+	//Si il y a plusieurs entrees l'automate n'est pas standard
 	unsigned int entrees = 0;
 	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
@@ -203,7 +220,7 @@ bool Automate::isStandard()
 		}
 	}
 
-	//Si une transition revient sur l'etat initial l'automate n'est as standart
+	//Si une transition revient sur l'etat initial l'automate n'est pas standard
 	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		if (_listStates[i]->transitionsEtatInitial())
@@ -214,6 +231,9 @@ bool Automate::isStandard()
 	return true;
 }
 
+/**
+* Automate complet ?
+*/
 bool Automate::isComplet()
 {
 	//Si un automate n'est pas déterministe alors il ne peux pas etre complet
@@ -237,6 +257,9 @@ bool Automate::isComplet()
 	return true;
 }
 
+/**
+* Déterminise un automate
+*/
 void Automate::determiniser()
 {
 	Automate deterministe;
@@ -308,7 +331,10 @@ void Automate::determiniser()
 	*this = deterministe;
 }
 
-
+/**
+* Affiche la view principale du programme, avec les items du menu à gauche et à droite les infos de l'automate
+* NB : utilisation de setw pour pour fixer une taille
+*/
 void Automate::print()
 {
 	unsigned int cpt = 0;
