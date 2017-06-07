@@ -15,39 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Utils.cpp">
+    <ClCompile Include="E3-Alphabet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Alphabet.cpp">
+    <ClCompile Include="E3-Automate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Automate.cpp">
+    <ClCompile Include="E3-Etat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Etat.cpp">
+    <ClCompile Include="E3-main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transition.cpp">
+    <ClCompile Include="E3-Transition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="E3-Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utils.h">
+    <ClInclude Include="E3-Alphabet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Alphabet.h">
+    <ClInclude Include="E3-Automate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Automate.h">
+    <ClInclude Include="E3-Etat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Etat.h">
+    <ClInclude Include="E3-Transition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transition.h">
+    <ClInclude Include="E3-Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E3-Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

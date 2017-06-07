@@ -91,10 +91,12 @@ void Automate::loading(string fileName)
 	if (!origine)
 	{
 		Utils::consoleClear();
-		cerr << "Automate introuvable !" << endl;
+		_util.lineJump(1);
+		cerr << fg_red << " Automate '" + fileName + "' introuvable !" << fg_white << endl;
 		this->setFound(false);
 		return;
 	}
+	Utils::consoleClear();
 	this->setFound(true);
 
 	int tmpInt, nbrLecture, source, dest;
@@ -335,8 +337,11 @@ void Automate::determiniser()
 * Affiche la view principale du programme, avec les items du menu à gauche et à droite les infos de l'automate
 * NB : utilisation de setw pour pour fixer une taille
 */
+
+
 void Automate::print()
 {
+	_util.lineJump(1);
 	unsigned int cpt = 0;
 	vector<Transition> tmp;
 	_finalStates.clear();
@@ -353,26 +358,25 @@ void Automate::print()
 			_finalStates.push_back(_listStates[i]->getNom());
 	}
 
+	cout << fg_white << setw(50) << left << " [0] Quitter"
+		<< fg_green << setw(20) << left << "*** Informations sur l'automate ***" << endl;
 
-	cout << setw(50) << left << "0: Quitter"
-		<< setw(20) << left << "*** Informations sur l'automate ***" << endl;
-
-	cout << setw(50) << left << "1: Changer d'automate"
+	cout << fg_white << setw(50) << left << " [1] Changer d'automate"
 		<< setw(20) << left << " Nom de l'automate : " + _fileName << ".txt" << endl;
 
-	cout << setw(50) << left << "2: Savoir si l'aumotate est synchrone"
+	cout << fg_white << setw(50) << left << " [2] Savoir si l'aumotate est synchrone"
 		<< setw(20) << left << " Elements dans l'alphabet : " + _util.ToString(_abcd.getAlphabetSize()) << endl;
 
 
-	cout << setw(50) << left << "3: Savoir si l'automate est deterministe"
+	cout << fg_white << setw(50) << left << " [3] Savoir si l'automate est deterministe"
 		<< setw(20) << left << " Nombre d'etats : " + _util.ToString(_listStates.size()) << endl;
 
 
-	cout << setw(50) << left << "4: Savoir si l'automate est standard"
+	cout << fg_white << setw(50) << left << " [4] Savoir si l'automate est standard"
 		<< setw(20) << left << " Nombre d'etats initiaux : " + _util.ToString(_initialStates.size()) << endl;
 
 
-	cout << setw(50) << left << "5: Savoir si l'automate est complet"
+	cout << fg_white << setw(50) << left << " [5] Savoir si l'automate est complet"
 		<< setw(20) << left << " Nombre d'etats terminaux : " + _util.ToString(_finalStates.size()) << endl;
 
 
@@ -384,61 +388,53 @@ void Automate::print()
 			cpt++;
 		}
 	}
-	cout << setw(50) << left << "6: Determiniser l'automate"
+	cout << fg_white << setw(50) << left << " [6] Determiniser l'automate"
 		<< setw(20) << left << " Nombre de transitions : " + _util.ToString(cpt) << endl;
 	//cpt = 0;
 
 
-	cout << setw(50) << left << "7: Completer l'automate"
-		<< setw(20) << left << "***********************************" << endl;
+	cout << fg_white << setw(50) << left << " [7] Completer l'automate"
+		<< fg_green << setw(20) << left << "***********************************" << endl;
 
 
-	cout << "8: Standardiser l'automate" << endl;
+	cout << fg_white << " [8] Standardiser l'automate" << endl;
 
-	cout << setw(50) << "9: Complementariser l'automate"
-		<< setw(20) << left << "********* Automate obtenu *********" << endl;
+	cout << fg_white << setw(50) << " [9] Complementariser l'automate"
+		<< fg_yellow << setw(20) << left << "********* Automate obtenu *********" << endl;
 
-	cout << setw(50) << left << "10: Minimiser l'automate"
-		<< setw(20) << left << " Etats initiaux ";
+	cout << fg_white << setw(50) << left << " [10] Minimiser l'automate"
+		<< setw(20) << left << " Etats initiaux : ";
 	cout << "[";
 	//Les états initiaux
 	for (unsigned int i = 0; i < _initialStates.size(); i++)
 	{
-		cout << "(" << _initialStates[i] << ")";
+		cout << fg_magenta << "(" << _initialStates[i] << ")";
 	}
-	cout << "]" << endl;
+	cout << fg_white << "]" << fg_white << endl;
 
 
-	cout << setw(50) << left << "11: Entrer un mot a tester"
-		<< setw(20) << left << " Etats Terminaux ";
-	cout << "[";
-	//Les etats terminaux
+	cout << fg_white << setw(50) << left << " [11] Entrer un mot a tester"
+		<< setw(20) << left << " Etats Terminaux : ";
+	cout << fg_white << "[";
+	//Les etats terminaux01
 	for (unsigned int i = 0; i < _finalStates.size(); i++)
 	{
-		cout << "(" << _finalStates[i] << ")";
+		cout << fg_magenta << "(" << _finalStates[i] << ")";
 	}
-	cout << "]" << endl;
+	cout << fg_white << "]" << endl;
 
-
+	cout << setw(50) << left << " " << setw(20) << left << " Liste des transitions : " << endl;
 	//Les transitions
 	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
 		tmp = _listStates[i]->getTransitions();
 		for (unsigned int j = 0; j < tmp.size(); j++)
 		{
-			cout << setw(50) << left << " " << setw(20) << left << " (" + _listStates[i]->getNom() + ") -> " + tmp[j].getCaractere() + " -> (" + tmp[j].getArrivee()->getNom() + ")" << endl;
+			cout << fg_magenta << setw(50) << left << " " << setw(20) << left << fg_magenta << "  (" + _listStates[i]->getNom() + ") -> " + tmp[j].getCaractere() + " -> (" + tmp[j].getArrivee()->getNom() + ")" << fg_white << endl;
 		}
 	}
 
-
-	//  std::cout << cpt << " ";
-
-
-	// std::cout << "\n" <<cpt << " ";
-	_util.lineJump(1);
-
-	//nbr transitions
-	_util.lineJump(1);
+	cout << setw(50) << left << " " << setw(20) << fg_yellow << left << "***********************************" << fg_white << endl;
 }
 
 void Automate::completer()
@@ -487,7 +483,7 @@ void Automate::analyseMot(string mot)
 	{
 		if (_abcd.inAlphabet(mot[i]) == false && mot != "*")
 		{
-			cout << mot << " n'est pas un mot reconaissable par cet automate" << endl;
+			cout << fg_red << mot << " n'est pas un mot reconaissable par cet automate" << fg_white << endl;
 			return;
 		}
 	}
@@ -509,7 +505,7 @@ void Automate::analyseMot(string mot)
 
 	if (actuel->getExit() == true && mot == "*")
 	{
-		cout << "L'automate reconnait le mot vide" << endl;
+		cout << fg_green << "L'automate reconnait le mot vide" << fg_white << endl;
 		this->reload();
 		return;
 	}
@@ -526,9 +522,9 @@ void Automate::analyseMot(string mot)
 	}
 
 	if (actuel->getExit() == true)
-		cout << mot << " est un mot reconaissable par cet automate" << endl;
+		cout << fg_green << mot << " est un mot reconaissable par cet automate" << fg_white << endl;
 	else
-		cout << mot << " n'est pas un mot reconaissable par cet automate" << endl;
+		cout << fg_red << mot << " n'est pas un mot reconaissable par cet automate" << fg_white << endl;
 
 	this->reload();
 }

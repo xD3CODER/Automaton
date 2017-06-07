@@ -5,6 +5,9 @@
 #include "E3-Alphabet.h"
 #include "E3-Etat.h"
 #include "E3-Utils.h"
+#include "E3-Color.h"
+
+using namespace ColorConsole;
 
 class Automate
 {
