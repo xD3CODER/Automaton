@@ -160,9 +160,8 @@ void Etat::suppDoublonsTransitions()
 void Etat::completion(Etat* P, std::vector<char> abcd)
 {
 	unsigned int i, j;
-	bool found;
 
-	found = false;
+	bool found = false;
 	for (i = 0; i < abcd.size(); i++)
 	{
 		for (j = 0; j < _listTransition.size(); j++)
