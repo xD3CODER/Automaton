@@ -101,7 +101,6 @@ void Automate::loading(string fileName)
 		this->setFound(false);
 		return;
 	}
-	Utils::consoleClear();
 	this->setFound(true);
 
 	int tmpInt, nbrLecture, source, dest;
@@ -280,6 +279,8 @@ vector<int> Automate::getEpsilons(Etat* a)
 */
 void Automate::determiniser()
 {
+	if (this->isDeterministe())
+		return;
 	Automate deterministe;
 	Etat* tmp = nullptr;
 
@@ -289,7 +290,7 @@ void Automate::determiniser()
 	//Somme des etats initiaux
 	for (unsigned int i = 0; i < _listStates.size(); i++)
 	{
-		if (_listStates[i]->getEntry())
+		if (_listStates[i]->getEntry()) // On regroupe les entrées
 		{
 			if (tmp == nullptr) // Si on a pas encore creer un etat inial on le creer
 			{
@@ -327,7 +328,7 @@ void Automate::determiniser()
 
 		for (unsigned int j = 0; j < tmpTransitions.size(); j++) // On parcours chaque transition
 		{
-			//Si l'etat ne fait pas parti de notre nouvel automate
+			//Si l'etat d'arrivée ne fait pas parti de notre nouvel automate
 			if (deterministe.findStatePosition(tmpTransitions[j].getArrivee()->getNom()) == -1)
 			{
 				// On l'ajoute
@@ -493,7 +494,7 @@ void Automate::inverser()
 
 	for (unsigned int i = 0; i < _listStates.size(); i++) // On parcours les etats
 	{
-		if (_listStates[i]->getExit()) // Les terminaux sont supprimés
+		if (_listStates[i]->getExit()) // Les terminaux deviennent non terminaux
 			_listStates[i]->setExit(false);
 		else
 			_listStates[i]->setExit(true); // Les non terminaux deviennent terminaux
