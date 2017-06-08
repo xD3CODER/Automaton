@@ -8,11 +8,11 @@ Alphabet::Alphabet()
 
 Alphabet::~Alphabet()
 {
-	// Déconstructeur
+	// Deconstructeur
 }
 
 /**
- *	Ajoute un caractère à la suite des autres caractères déjà présent
+ *	Ajoute un caractere à la suite des autres caracteres deja� present
  */
 void Alphabet::addCaratere(char nouveau)
 {
@@ -20,7 +20,7 @@ void Alphabet::addCaratere(char nouveau)
 }
 
 /**
- *	Retourne la taille de l'alphabet (méthode size d'un vector)
+ *	Retourne la taille de l'alphabet (methode size d'un vector)
  */
 unsigned int Alphabet::getAlphabetSize() const
 {
@@ -28,7 +28,7 @@ unsigned int Alphabet::getAlphabetSize() const
 }
 
 /**
- *	Surcharge de l'opérateur =, permettant de comparer deux alphabets
+ *	Surcharge de l'operateur =, permettant de comparer deux alphabets
  */
 Alphabet& Alphabet::operator=(const Alphabet& arg)
 {
@@ -38,7 +38,7 @@ Alphabet& Alphabet::operator=(const Alphabet& arg)
 }
 
 /**
- *	Récupère le vector contenant l'alphabet (ie: la liste des caractères)
+ *	Recupere le vector contenant l'alphabet (ie: la liste des caracteres)
  */
 std::vector<char> Alphabet::getAlphabet() const
 {
@@ -46,7 +46,7 @@ std::vector<char> Alphabet::getAlphabet() const
 }
 
 /**
- * Permet de savoir si un caractère est contenu dans l'alphabet
+ * Permet de savoir si un caractere est contenu dans l'alphabet
  */
 bool Alphabet::inAlphabet(char arg)
 {
@@ -55,14 +55,14 @@ bool Alphabet::inAlphabet(char arg)
 	// On parcourt l'alphabet
 	for (i = 0; i < _caracteres.size(); i++)
 	{
-		if (_caracteres[i] == arg) // Si le caractère est dans le "vector"
+		if (_caracteres[i] == arg) // Si le caractere est dans le "vector"
 			return true; // Alors il est contenu dans l'alphabet
 	}
 	return false;
 }
 
 /**
- * Supprime TOUT les éléments de l'alphabet (les caractères)
+ * Supprime TOUT les elements de l'alphabet (les caracteres)
  */
 void Alphabet::reset()
 {

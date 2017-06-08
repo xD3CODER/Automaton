@@ -1,6 +1,4 @@
 #include "E3-Utils.h"
-#include <fstream>
-#include <ctype.h>
 #include <iostream>
 
 using namespace std;

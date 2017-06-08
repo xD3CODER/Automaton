@@ -1,9 +1,7 @@
 #ifndef ETAT_H
 #define ETAT_H
 
-#include <iostream>
 #include <vector>
-#include <string>
 #include "E3-Transition.h"
 class Transition;
 
